@@ -41,5 +41,4 @@
 *.dwo
 
 build/
-include/
 libtorch/
