@@ -39,6 +39,6 @@ Matrix softmax_grad(/**/);
 
 float mse_loss(const Matrix& output,const Matrix& ground, int batch_size)
 {
-
+    return (output-ground).array().pow(2).sum()/batch_size;
 }
 Matrix mse_loss_grad(const Matrix& output,const Matrix& ground, int batch_size);
