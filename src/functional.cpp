@@ -29,16 +29,18 @@ Matrix linear_grad(const Matrix& grad_output,const Matrix& input,const Matrix& w
 
 Matrix softmax(const Matrix& input)
 {
-    Vector maxs=input.rowwise().maxCoeff();
-    Matrix normalized=input.colwise()-maxs;
-    Matrix input_exp=normalized.array().exp(); //look into this , why .array() , i know to differentiate between A² and a[i]² but still , there should be naother reason
-    return input_exp.colwise()/input_exp.rowwise().sum();
+    Vector row_max = input.rowwise().maxCoeff();
+    Matrix stabilized = input.array().colwise() - row_max.array();
+    Matrix exps = stabilized.array().exp();
+    Vector exps_row_sum = exps.rowwise().sum();
+    return exps.array().colwise() / exps_row_sum.array();
 }
+
 
 Matrix softmax_grad(/**/);
 
 float mse_loss(const Matrix& output,const Matrix& ground, int batch_size)
 {
-    return (output-ground).array().pow(2).sum()/batch_size;
+    return (output-ground).array().pow(2).sum()/output.rows();
 }
 Matrix mse_loss_grad(const Matrix& output,const Matrix& ground, int batch_size);
