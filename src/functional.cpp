@@ -1,7 +1,4 @@
-#pragma once
 #include <Eigen/Dense>
-#include <cmath>
-#include <numbers>
 
 using Matrix = Eigen::MatrixXf;
 using Vector = Eigen::VectorXf;
