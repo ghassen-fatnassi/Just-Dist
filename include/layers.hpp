@@ -98,4 +98,4 @@ class Softmax: Module
 };
 
 class Linear: Module
-{}
+{};
